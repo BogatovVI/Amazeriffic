@@ -1,0 +1,114 @@
+body{
+    background: #f9e933;
+}
+
+header,main,footer{
+    min-width: 855px;
+}
+
+header .container, main .container, footer .container{
+    max-width: 855px;
+    margin: auto;
+}
+
+main{
+    background: white;
+    overflow: auto;
+    padding-top: 5vh;
+    padding-bottom: 15vh;
+}
+
+header{
+    background: white;
+    overflow: auto;
+    border-bottom: 1px solid black;
+}
+
+header h1{
+    float: left;
+    width: 570px;
+    padding: 4vh;
+}
+
+header nav{
+    float: right;
+    width: 285px;
+    padding-top: 3vh;
+}
+
+header nav a{
+    text-decoration: none;
+    color: red;
+    padding-right: 2px;
+    border-right: 1px solid red;
+}
+
+header nav a:hover{
+    text-decoration: underline;
+}
+
+.contact, .information{
+    float: left;
+    width: 570px;
+}
+
+.sitemap, .image{
+    float: right;
+    width: 285px;
+}
+
+.sitemap .first{
+    padding-top: 2vh;
+    float: left;
+}
+
+.sitemap .second{
+    padding-top: 2vh;
+    float: right;
+}
+
+.sitemap a{
+    text-decoration: none;
+    color: red;;
+}
+
+.sitemap li{
+    padding-top: 1.2vh;
+}
+
+.sitemap a:hover{
+    text-decoration: underline;
+}
+
+body{
+    font-size: 2.5vh;
+}
+
+h1, h2, h3, h4{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 4vh;
+    padding-top: 5vh;
+}
+
+.image img{
+    min-width: 300px;
+    padding-left: 6vh;
+}
+
+p{
+    padding-top: 2vh;
+}
+
+main ul{
+    list-style: disc;
+    padding-top: 2vh;
+    padding-left: 2vh;
+}
+
+main li{
+    padding-top: 2vh;
+}
+
+footer h5{
+    padding-top: 4vh;
+}
