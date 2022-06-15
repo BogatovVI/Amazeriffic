@@ -47,7 +47,7 @@ header nav a:hover{
     text-decoration: underline;
 }
 
-.contact, .information{
+.contact{
     float: left;
     width: 570px;
 }
@@ -111,4 +111,33 @@ main li{
 
 footer h5{
     padding-top: 4vh;
+}
+
+.tabs a span {
+    display: inline-block;
+    border-radius: 5px 5px 0 0;
+    width: 100px;
+    margin-right: 10px;
+    text-align: center;
+    background: #ddd;
+    padding: 5px;
+}
+
+.tabs a span.active {
+    background: #eee;
+}
+
+.add-text:before{
+    content: '+';
+}
+
+.text{
+    margin: 3vh;
+    width: 30vh;
+}
+
+.content{
+    background: #eee;
+    padding-bottom: 4vh;
+    padding-left: 2vh;
 }
