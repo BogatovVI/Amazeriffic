@@ -63,9 +63,12 @@ let main = function (toDoObject) {
                 }));
                 $(".add-text").on('click', function (){
                     let description = $('.text-1').val().split(",");
-                    let tag = $('.text-2').val().split(",");
-                    toDoObject.push({"description":description, "tags":tag});
-                    console.log(toDoObject);
+                    let tags = $('.text-2').val().split(",");
+                    let newToDo = {"description":description, "tags":tags};
+                    $.post("todos", newToDo, function (result){
+                        console.log(result);
+                    });
+                    toDoObject.push(newToDo);
                     toDos = toDoObject.map(function (toDo) {
                         return toDo.description;
                     });
