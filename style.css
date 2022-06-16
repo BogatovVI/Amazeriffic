@@ -131,7 +131,7 @@ footer h5{
     content: '+';
 }
 
-.text{
+.text-1, .text-2{
     margin: 3vh;
     width: 30vh;
 }
