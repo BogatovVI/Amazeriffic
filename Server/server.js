@@ -1,41 +1,37 @@
-var express = require("express"),
+let express = require("express"),
     http = require("http"),
-    app = express(),
-    toDos =
-        [
-            {
-                "description" : "Купить продукты",
-                "tags" : [ "шопинг", "рутина" ]
-            },
-            {
-                "description" : "Сделать несколько новых задач",
-                "tags" : [ "писательство", "работа" ]
-            },
-            {
-                "description" : "Подготовиться к лекции в понедельник",
-                "tags" : [ "работа", "преподавание" ]
-            },
-            {
-                "description" : "Ответить на электронные письма",
-                "tags" : [ "работа" ]
-            },
-            {
-                "description" : "Вывести Грейси на прогулку в парк",
-                "tags" : [ "рутина", "питомцы" ]
-            },
-            {
-                "description" : "Закончить писать книгу",
-                "tags" : [ "писательство", "работа" ]
-            }];
+    app = express();
+const {connection} = require("mongoose");
+let mongoose = require("mongoose");
+let mongoDB = 'mongodb://localhost/Amazeriffic';
+mongoose.connect(mongoDB);
+let ToDoSchema = mongoose.Schema({
+    description: String,
+    tags: [ String ]
+});
+let ToDo = mongoose.model("ToDo", ToDoSchema);
 app.use(express.static(__dirname + "/Client"));
 let server = http.createServer(app).listen(8000);
 app.use(express.urlencoded());
 app.get("/todos.json", function (req, res) {
-    res.json(toDos);
+    ToDo.find({}, function (err, toDos){
+        res.json(toDos);
+    });
 });
 app.post("/todos", function (req, res) {
-    let newToDo = req.body;
-    console.log(newToDo);
-    toDos.push(newToDo);
-    res.json({"message": "Вы размещаетесь на сервере"});
+    console.log(req.body);
+    let newToDo = new ToDo({"description":req.body.description, "tags":req.body.tags});
+    newToDo.save(function (err, result) {
+        if (err !== null) {
+            console.log(err);
+            res.send("ERROR");
+        } else {
+            ToDo.find({}, function (err, result) {
+                if (err !== null) {
+                    res.send("ERROR");
+                }
+                res.json(result);
+            });
+        }
+    });
 });
