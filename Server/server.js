@@ -6,7 +6,7 @@ let mongoose = require("mongoose");
 let mongoDB = 'mongodb://localhost/Amazeriffic';
 mongoose.connect(mongoDB);
 let ToDoSchema = mongoose.Schema({
-    description: String,
+    description: [String],
     tags: [ String ]
 });
 let ToDo = mongoose.model("ToDo", ToDoSchema);
@@ -14,7 +14,7 @@ app.use(express.static(__dirname + "/Client"));
 let server = http.createServer(app).listen(8000);
 app.use(express.urlencoded());
 app.get("/todos.json", function (req, res) {
-    ToDo.find({}, function (err, toDos){
+    ToDo.find({ }, function (err, toDos){
         res.json(toDos);
     });
 });
