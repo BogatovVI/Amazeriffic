@@ -106,6 +106,37 @@ ToDosController.create = function (req, res) {
         }
     });
 };
+
+ToDosController.destroy = function (req, res) {
+    let id = req.params.id;
+    ToDo.deleteOne({"_id": id}, function (err, todo) {
+        if (err !== null) {
+            res.status(500).json(err);
+        } else {
+            if (todo.n === 1 && todo.ok === 1 && todo.deletedCount === 1) {
+                res.status(200).json(todo);
+            } else {
+                res.status(404).json({"status": 404});
+            }
+        }
+    });
+};
+
+ToDosController.update = function (req, res) {
+    let id = req.params.id;
+    let newDescription = {$set: {description: req.body.description}};
+    ToDo.updateOne({"_id": id}, newDescription, function (err, todo) {
+        if (err !== null) {
+            res.status(500).json(err);
+        } else {
+            if (todo.n === 1 && todo.nModified === 1 && todo.ok === 1) {
+                res.status(200).json(todo);
+            } else {
+                res.status(404).json({"status": 404});
+            }
+        }
+    });
+};
 module.exports = ToDosController;
 
 let ToDo = mongoose.model("ToDo", ToDoSchema);
@@ -121,8 +152,8 @@ app.put("/users/:username", UserController.update);
 app.delete("/users/:username", UserController.destroy);
 app.get("/user/:username/todos.json", ToDosController.index);
 app.post("/user/:username/todos", ToDosController.create);
-//app.put("/user/:username/todos/:id", ToDosController.update);
-//app.delete("/user/:username/todos/:id", ToDosController.destroy);
+app.put("/user/:username/todos/:id", ToDosController.update);
+app.delete("/user/:username/todos/:id", ToDosController.destroy);
 app.get("/todos.json", function (req, res) {
     ToDo.find({ }, function (err, toDos){
         res.json(toDos);
